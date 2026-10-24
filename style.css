@@ -1,0 +1,141 @@
+/* ===== 1. ДИЗАЙН-ТОКЕНЫ: цвета и размеры меняются в одном месте ===== */
+:root{
+  --bg:#f6fbfa; --surface:#fff; --text:#0d2230; --muted:#5b7080; --line:#dbe8e6;
+  --brand:#0fa89a; --brand2:#12c4b0; --ink:#0b3a4a; --accent:#ffb84d; --r:24px;
+  --shadow:0 20px 50px -20px rgba(11,58,74,.25);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#071a22; --surface:#0d2530; --text:#eaf5f4; --muted:#93aeb8; --line:#173744; --ink:#c9f3ee;
+  --shadow:0 20px 50px -20px rgba(0,0,0,.6);}}
+:root[data-theme="dark"]{--bg:#071a22; --surface:#0d2530; --text:#eaf5f4; --muted:#93aeb8; --line:#173744; --ink:#c9f3ee; --shadow:0 20px 50px -20px rgba(0,0,0,.6);}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Onest,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55;overflow-x:hidden}
+h1,h2,h3{line-height:1.08;letter-spacing:-.03em;margin:0}
+h1{font-size:clamp(2.4rem,6.5vw,4.8rem);font-weight:800}
+h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:800}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+section{padding:84px 0}
+.eyebrow{display:inline-block;color:var(--brand);font-weight:700;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.lead{color:var(--muted);font-size:1.1rem;max-width:560px;margin-top:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:15px 26px;border-radius:999px;font-weight:700;border:0;cursor:pointer;font:inherit;font-weight:700;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;box-shadow:0 12px 30px -10px var(--brand)}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--line)}
+
+/* ===== 2. ШАПКА: стеклянная, липкая, ссылки-якоря на секции ===== */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;backdrop-filter:blur(16px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
+.logo i{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center}
+.logo svg{width:20px;fill:#fff}
+.links{display:flex;gap:26px;color:var(--muted);font-weight:500}
+.links a:hover{color:var(--brand)}
+.nav-r{display:flex;gap:10px;align-items:center}
+.theme{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--text);font-size:1.1rem}
+@media(max-width:860px){.links{display:none}.nav-r .btn{display:none}}
+
+/* ===== 3. HERO: главный экран — оффер, кнопки, доверие ===== */
+.hero{position:relative;padding:70px 0 90px;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.45;z-index:0;animation:float 12s ease-in-out infinite}
+.b1{width:420px;height:420px;background:var(--brand2);top:-120px;right:-80px}
+.b2{width:320px;height:320px;background:var(--accent);bottom:-100px;left:-80px;opacity:.25;animation-delay:-5s}
+@keyframes float{50%{transform:translate(30px,40px) scale(1.1)}}
+.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center}
+.pill{display:inline-flex;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);padding:8px 14px;border-radius:999px;font-size:.88rem;font-weight:600;margin-bottom:22px}
+.pill b{width:8px;height:8px;border-radius:50%;background:#2ecc71;box-shadow:0 0 0 4px rgba(46,204,113,.25)}
+.grad{background:linear-gradient(120deg,var(--brand),#2a7fff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.proof{display:flex;gap:26px;margin-top:38px;flex-wrap:wrap}
+.proof div{font-size:.9rem;color:var(--muted)}
+.proof strong{display:block;font-size:1.7rem;color:var(--text);letter-spacing:-.03em}
+.hero-card{background:var(--surface);border:1px solid var(--line);border-radius:32px;padding:26px;box-shadow:var(--shadow);position:relative}
+.hero-card svg{width:100%;max-height:300px}
+.float-badge{position:absolute;background:var(--surface);border:1px solid var(--line);padding:10px 14px;border-radius:16px;box-shadow:var(--shadow);font-size:.85rem;font-weight:600}
+.fb1{top:18px;left:-22px}.fb2{bottom:26px;right:-18px}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.fb1{left:6px}.fb2{right:6px}}
+
+/* ===== 4. УСЛУГИ: bento-сетка (тренд 2025–2026) ===== */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.card .ic{font-size:1.8rem;margin-bottom:14px}
+.card h3{font-size:1.2rem;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.95rem}
+.card .pr{display:block;margin-top:14px;font-weight:700;color:var(--brand)}
+.card.big{grid-column:span 2;background:linear-gradient(135deg,var(--ink),#0e6b73);color:#fff;border:0}
+.card.big p{color:#cdeee9}.card.big .pr{color:var(--accent)}
+.card.wide{grid-column:span 2}
+@media(max-width:900px){.bento{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.bento{grid-template-columns:1fr}.card.big,.card.wide{grid-column:auto}}
+
+/* ===== 5. ДО/ПОСЛЕ: интерактивный слайдер — главный «вау» для клиента ===== */
+.ba{position:relative;max-width:760px;aspect-ratio:16/9;margin:44px auto 0;border-radius:32px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);--p:50%;user-select:none}
+.ba .side{position:absolute;inset:0;display:grid;place-items:center}
+.ba svg{width:46%}
+.ba .before{background:linear-gradient(135deg,#d9cfae,#c3b58a)}
+.ba .after{background:linear-gradient(135deg,#dff7f4,#b6ece5);clip-path:inset(0 0 0 var(--p))}
+.ba .tag{position:absolute;top:16px;padding:6px 14px;border-radius:999px;background:rgba(0,0,0,.55);color:#fff;font-weight:700;font-size:.8rem}
+.ba .t1{left:16px}.ba .t2{right:16px}
+.ba .bar{position:absolute;top:0;bottom:0;left:var(--p);width:3px;background:#fff;transform:translateX(-50%);pointer-events:none}
+.ba .bar::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#fff;color:#0b3a4a;display:grid;place-items:center;font-weight:800;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+
+/* ===== 6. ВРАЧИ ===== */
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.avatar{height:200px;display:grid;place-items:center;font-size:3.6rem;font-weight:800;color:#fff}
+.doc .in{padding:20px}
+.doc h3{font-size:1.15rem}
+.doc span{color:var(--brand);font-weight:600;font-size:.9rem}
+.doc p{color:var(--muted);font-size:.92rem;margin-top:8px}
+@media(max-width:800px){.docs{grid-template-columns:1fr}}
+
+/* ===== 7. КАК ПРОХОДИТ ПРИЁМ: снимает страх и вопросы ===== */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px;counter-reset:s}
+.step{padding:26px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);counter-increment:s}
+.step::before{content:"0" counter(s);font-size:2.4rem;font-weight:800;color:var(--brand);opacity:.5;letter-spacing:-.04em}
+.step h3{font-size:1.1rem;margin:8px 0}
+.step p{color:var(--muted);font-size:.93rem}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* ===== 8. ОТЗЫВЫ ===== */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.rev{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.stars{color:var(--accent);letter-spacing:2px}
+.rev p{margin:12px 0 16px}
+.rev b{font-size:.92rem}
+@media(max-width:800px){.revs{grid-template-columns:1fr}}
+
+/* ===== 9. FAQ: нативный <details>, без JS ===== */
+.faq{max-width:760px;margin:44px auto 0;display:grid;gap:12px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 22px}
+summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";color:var(--brand);font-size:1.4rem;line-height:1}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin-top:12px}
+
+/* ===== 10. ЗАПИСЬ: форма — конверсия, ради неё всё сделано ===== */
+.book{background:linear-gradient(135deg,var(--ink),#0e6b73);color:#fff;border-radius:40px;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.book p{color:#cdeee9;margin-top:12px}
+form{display:grid;gap:12px}
+input.f,select.f{width:100%;padding:16px 18px;border-radius:16px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.12);color:#fff;font:inherit}
+select.f option{color:#000}
+input.f::placeholder{color:#b9dad6}
+.ok{display:none;background:rgba(46,204,113,.2);border:1px solid #2ecc71;padding:16px;border-radius:16px}
+@media(max-width:800px){.book{grid-template-columns:1fr;padding:30px 22px;border-radius:28px}}
+
+/* ===== 11. ПОДВАЛ + липкая кнопка на телефоне ===== */
+footer{padding:50px 0 100px;color:var(--muted);border-top:1px solid var(--line);margin-top:60px}
+.fgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px}
+.sticky{position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;display:none;justify-content:center;box-shadow:0 16px 40px -10px var(--brand)}
+@media(max-width:860px){.sticky{display:flex}}
+
+/* ===== 12. АНИМАЦИЯ ПОЯВЛЕНИЯ при скролле ===== */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.blob{animation:none}}
